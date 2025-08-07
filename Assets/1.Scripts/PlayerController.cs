@@ -29,7 +29,17 @@ public class PlayerController : MonoBehaviour
     {
         float move = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
         Vector3 newPosition = transform.position + Vector3.right * move;
-        newPosition.x = Mathf.Clamp(newPosition.x, -rangeX, rangeX);
+        //newPosition.x = Mathf.Clamp(newPosition.x, -rangeX, rangeX);
+
+        if (newPosition.x < -rangeX)
+        {
+            newPosition.x = rangeX;
+        }
+        else if (newPosition.x > rangeX)
+        {
+            newPosition.x = -rangeX;
+        }
+
         transform.position = newPosition;
 
         if (Input.GetKeyDown(KeyCode.Space))
