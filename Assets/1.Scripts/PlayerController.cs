@@ -40,5 +40,6 @@ public class PlayerController : MonoBehaviour
         int nextColorIndex = (ColorManager.currentColorIndex + 1) % ColorManager.totalColors;
         ColorManager.currentColorIndex = nextColorIndex;
         pogoTipRenderer.color = ColorManager.colors[ColorManager.currentColorIndex];
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.colorChangeSound);
     }
 }

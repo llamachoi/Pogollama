@@ -30,6 +30,8 @@ public class Platform : MonoBehaviour
         {
             Rigidbody2D playerRb = collision.GetComponent<Rigidbody2D>();
             playerRb.linearVelocity = transform.up * baseBounceForce;
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.bounceSound);
         }
     }
 }
