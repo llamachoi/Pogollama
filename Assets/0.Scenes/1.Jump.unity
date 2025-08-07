@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1834607364}
-  followSpeed: 1
+  followSpeed: 5
   minY: 0
 --- !u!114 &221704693
 MonoBehaviour:
@@ -1040,6 +1040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 228768415}
+  - component: {fileID: 228768417}
   - component: {fileID: 228768414}
   - component: {fileID: 228768416}
   m_Layer: 0
@@ -1106,6 +1107,20 @@ MonoBehaviour:
   - {fileID: 1941477071}
   - {fileID: 741294240}
   - {fileID: 2042478318}
+--- !u!114 &228768417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228768413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 827a3e3b564dfb34aa0a08b0242deae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCollider: {fileID: 732390418}
+  isGameOver: 0
 --- !u!1 &282141453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,6 +1804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 732390417}
   - component: {fileID: 732390418}
+  - component: {fileID: 732390419}
   m_Layer: 0
   m_Name: Platform_Bottom
   m_TagString: Untagged
@@ -1878,6 +1894,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6, y: 0.25}
   m_EdgeRadius: 0
+--- !u!114 &732390419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732390416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d401cb561c7be142a474980559624f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &741294240
 GameObject:
   m_ObjectHideFlags: 0

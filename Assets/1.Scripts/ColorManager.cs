@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
-    public static int currentColorIndex = 0;
+    public static int currentColorIndex;
     
     [SerializeField] private Color[] colorPalette;
 
@@ -25,12 +25,13 @@ public class ColorManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
     private void Start()
     {
+        // static 필드는 Scene이 로드되도 초기화되지 않으므로, Start에서 초기화합니다.
         totalColors = startColors;
-    }
+        currentColorIndex = 0;
+    } 
 }

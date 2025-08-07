@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.isGameOver) return;
+
         float move = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
         Vector3 newPosition = transform.position + Vector3.right * move;
 
