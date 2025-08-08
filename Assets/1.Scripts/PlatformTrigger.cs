@@ -114,9 +114,20 @@ public class PlatformTrigger : MonoBehaviour
 
     public void ResetPlatform()
     {
+        StartCoroutine(ResetAndCheckVisibility());
+    }
+
+    private IEnumerator ResetAndCheckVisibility()
+    {
+        yield return null; // 한 프레임 대기
+
         currentCrackCount = setCrackCount;
         platformRenderer.sprite = PlatformManager.Instance.crackedPlatformSprites[currentCrackCount];
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.respawnSound);
+
+        if (platformRenderer.isVisible)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.respawnSound);
+        }
     }
 
     private void HandleRainbow()
