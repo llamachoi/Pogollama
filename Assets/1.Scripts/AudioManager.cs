@@ -10,8 +10,11 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip bgmSound;
     public AudioClip bounceSound;
+    public AudioClip crackSound;
+    public AudioClip destroySound;
     public AudioClip addColorSound;
     public AudioClip colorChangeSound;
+    public AudioClip respawnSound;
 
     private AudioClip lastPlayedClip;
     private float lastPlayedTime;
@@ -22,7 +25,6 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
