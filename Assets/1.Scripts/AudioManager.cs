@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -9,9 +10,12 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip bgmSound;
     public AudioClip bounceSound;
-    public AudioClip itemSound;
+    public AudioClip addColorSound;
     public AudioClip colorChangeSound;
 
+    private AudioClip lastPlayedClip;
+    private float lastPlayedTime;
+    public float sameClipCooldown;
 
     void Awake()
     {
@@ -43,9 +47,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip clip)
     {
-        if (sfxSource != null && clip != null)
-        {
-            sfxSource.PlayOneShot(clip);
-        }
+        if (sfxSource == null && clip == null) { Debug.Log("Audio Source or Clip is Missing"); return; }
+        if (clip == lastPlayedClip && Time.time - lastPlayedTime < sameClipCooldown) return; // 동일 효과음 겹침 방지
+
+        sfxSource.PlayOneShot(clip);
+
+        lastPlayedClip = clip;
+        lastPlayedTime = Time.time;
     }
 }
