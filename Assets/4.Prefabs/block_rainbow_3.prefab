@@ -93,7 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseBounceForce: 3.5
-  currentPlatformColor: 7
+  currentPlatformColor: 0
+  currentPlatformType: 2
+  setCrackCount: 0
 --- !u!212 &7363008921501460388
 SpriteRenderer:
   m_ObjectHideFlags: 0
