@@ -6,7 +6,7 @@ public class GroundCheck : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Game Over");
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.groundSound);
             GameManager.Instance.GameOver();
         }
     }
