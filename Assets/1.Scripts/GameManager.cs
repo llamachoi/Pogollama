@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,13 +8,11 @@ public class GameManager : MonoBehaviour
 
     public BoxCollider2D groundCollider;
 
-    [HideInInspector]
-    public bool isGameOver = false;
+    [HideInInspector] public bool isGameOver = false;
+    private bool canReset = false;
 
     public TextMeshProUGUI timeText;
-    private float timeElapsed = 900f;
-
-    bool gamePaused = false;
+    public float timeElapsed = 900f;
 
     public GameObject gameOverUI;
 
@@ -38,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && isGameOver)
+        if (Input.GetKeyDown(KeyCode.R) && canReset)
         {
             RestartGame();
         }
@@ -48,33 +45,35 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        AudioManager.Instance.StopBGM();
-        StartCoroutine(WaitForGameOver());
+        if (!isGameOver) StartCoroutine(WaitForGameOver());
     }
 
     IEnumerator WaitForGameOver()
     {
-        yield return new WaitForSeconds(0.5f);
-        gamePaused = true;
         isGameOver = true;
+        AudioManager.Instance.StopBGM();
+
+        yield return new WaitForSeconds(0.5f);
         AudioManager.Instance.PlaySFX(AudioManager.Instance.gameOverSound);
 
+        canReset = true;
         gameOverUI.SetActive(true);
     }
 
     public void RestartGame()
     {
-        gamePaused = false;
-        isGameOver = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
     void UpdateTimeUI()
     {
-        if (gamePaused) return;
-        
+        if (isGameOver) return;
+
         if (timeElapsed <= 0f)
         {
+            timeElapsed = 0f;
+            timeText.text = "00:00.00";
+
             GameOver();
             return;
         }

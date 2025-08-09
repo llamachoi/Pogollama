@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float maxFallSpeed = -10f;
     public float rangeX;
+    public float minY = -4f;
+
     public SpriteRenderer pogoTipRenderer;
     private Rigidbody2D rb;
 
@@ -16,7 +18,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.isGameOver) return;
+        if (GameManager.Instance.isGameOver)
+        {
+            HandleGameOver();
+            return;
+        }
 
         float move = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
         Vector3 newPosition = transform.position + Vector3.right * move;
@@ -53,5 +59,13 @@ public class PlayerController : MonoBehaviour
         ColorManager.currentColorIndex = nextColorIndex;
         pogoTipRenderer.color = ColorManager.colors[ColorManager.currentColorIndex];
         AudioManager.Instance.PlaySFX(AudioManager.Instance.colorChangeSound);
+    }
+
+    void HandleGameOver()
+    {
+        CircleCollider2D playerCollider = GetComponent<CircleCollider2D>();
+
+        if (playerCollider.enabled) playerCollider.enabled = false;
+        if (transform.position.y < minY && gameObject.activeSelf) gameObject.SetActive(false);
     }
 }
