@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip respawnSound;
     public AudioClip groundSound;
     public AudioClip gameOverSound;
+    public AudioClip timeOverSound;
 
     static private int[] playedIDs = new int[5];
     static private float[] lastPlayedTimes = new float[5];

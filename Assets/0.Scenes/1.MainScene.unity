@@ -1318,7 +1318,7 @@ MonoBehaviour:
   groundCollider: {fileID: 732390418}
   isGameOver: 0
   timeText: {fileID: 2061479649}
-  timeElapsed: 5
+  timeElapsed: 900
   gameOverUI: {fileID: 1912311906}
 --- !u!114 &228768418
 MonoBehaviour:
@@ -2242,6 +2242,7 @@ MonoBehaviour:
   respawnSound: {fileID: 8300000, guid: 78743e5dd21c9f54da30255e21be0500, type: 3}
   groundSound: {fileID: 8300000, guid: c717e68876069b64f968af0cd606bcda, type: 3}
   gameOverSound: {fileID: 8300000, guid: 0245f8c59d562644d8ef2b1444098422, type: 3}
+  timeOverSound: {fileID: 8300000, guid: 7f371162063a62b4c9050dac1acd6b44, type: 3}
   skipCoolTime: 0.05
 --- !u!1 &479872888
 GameObject:
@@ -4062,7 +4063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &817210544
 Transform:
   m_ObjectHideFlags: 0
@@ -4828,6 +4829,7 @@ Transform:
   - {fileID: 1209817854}
   - {fileID: 1041195324}
   - {fileID: 1117618561}
+  - {fileID: 1496778761}
   - {fileID: 1575992048}
   - {fileID: 6133200351135173112}
   - {fileID: 1082456377}
@@ -6015,6 +6017,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 502776510039207634, guid: 2bd999d3c7a72a64a8437375db584b0a, type: 3}
   m_PrefabInstance: {fileID: 1474274098}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1496778760
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1076448414}
+    m_Modifications:
+    - target: {fileID: 2762563545986825840, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_Name
+      value: block_indigo_3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 50.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+--- !u!4 &1496778761 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9037903346365227330, guid: c226bfad81a9cbe4bb01f2dcebe27c6c, type: 3}
+  m_PrefabInstance: {fileID: 1496778760}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1521411938
 GameObject:
@@ -7246,7 +7310,7 @@ MonoBehaviour:
   moveSpeed: 3
   maxFallSpeed: -10
   rangeX: 2.7
-  minY: -3.5
+  minY: -4
   pogoTipRenderer: {fileID: 762576112}
 --- !u!212 &1834607363
 SpriteRenderer:

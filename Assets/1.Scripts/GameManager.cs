@@ -74,6 +74,8 @@ public class GameManager : MonoBehaviour
             timeElapsed = 0f;
             timeText.text = "00:00.00";
 
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.timeOverSound);
+
             GameOver();
             return;
         }
