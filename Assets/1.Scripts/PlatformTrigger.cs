@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlatformTrigger : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class PlatformTrigger : MonoBehaviour
     {
         Normal,
         Cracked,
-        Rainbow
+        Rainbow,
+        Finish
     }
 
     public enum platformColor
@@ -34,6 +36,10 @@ public class PlatformTrigger : MonoBehaviour
     private int currentCrackCount;
     private int maxCrackCount = 4;
 
+    public float finishAscendSpeed = 5f;
+    public float finishDuration = 5f;
+    private bool isFinishing = false;
+
     private void Start()
     {
         platformRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -51,6 +57,8 @@ public class PlatformTrigger : MonoBehaviour
             case platformType.Rainbow:
                 platformRenderer.color = Color.white;
                 platformRenderer.sprite = PlatformManager.Instance.rainbowPlatformSprite;
+                break;
+            case platformType.Finish:
                 break;
             default:
                 Debug.LogWarning("Unknown platform type: " + currentPlatformType);
@@ -82,6 +90,9 @@ public class PlatformTrigger : MonoBehaviour
             case platformType.Rainbow:
                 Bounce(rb);
                 HandleRainbow();
+                break;
+            case platformType.Finish:
+                HandleFinish(rb);
                 break;
         }
     }
@@ -140,6 +151,19 @@ public class PlatformTrigger : MonoBehaviour
             AudioManager.Instance.PlaySFX(AudioManager.Instance.addColorSound);
             hasAddedColor = true;
         }
+    }
+
+    private void HandleFinish(Rigidbody2D rb)
+    {
+        if (isFinishing) return;
+        isFinishing = true;
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.finalBounceSound);
+
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.linearVelocity = Vector2.up * baseBounceForce;
+
+        GameManager.Instance.GameClear();
     }
 }
 

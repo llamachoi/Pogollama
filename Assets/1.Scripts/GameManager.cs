@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
     public float timeElapsed = 900f;
 
     public GameObject gameOverUI;
+    public GameObject gameClearUI;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI bestScoreText;
+
+    private float currentScore;
+    private float bestScore;
 
     private void Awake()
     {
@@ -31,6 +37,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameOverUI.SetActive(false);
+        gameClearUI.SetActive(false);
+
+        bestScore = PlayerPrefs.GetFloat("BestScore", 0);
     }
 
     private void Update()
@@ -86,5 +95,49 @@ public class GameManager : MonoBehaviour
         int seconds = (int)(timeElapsed % 60f);
         int centiseconds = (int)((timeElapsed - Mathf.Floor(timeElapsed)) * 100f);
         timeText.text = $"{minutes:00}:{seconds:00}.{centiseconds:00}";
+    }
+
+    public void GameClear()
+    {
+        if (!isGameOver) StartCoroutine(WaitForGameClear());
+    }
+
+    IEnumerator WaitForGameClear()
+    {
+        isGameOver = true;
+
+        yield return new WaitForSeconds(1f);
+
+        Camera.main.GetComponent<CameraMovement>().enabled = false;
+
+        AudioManager.Instance.StopBGM();
+
+        yield return new WaitForSeconds(0.5f);
+        
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.gameClearSound);
+
+        canReset = true;
+
+        scoreText.text = timeText.text;
+
+        currentScore = timeElapsed;
+
+        if (currentScore > bestScore)
+        {
+            bestScore = currentScore;
+            bestScoreText.text = "NEW RECORD!";
+            PlayerPrefs.SetFloat("BestScore", bestScore);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            int minutes = (int)(bestScore / 60f);
+            int seconds = (int)(bestScore % 60f);
+            int centiseconds = (int)((bestScore - Mathf.Floor(bestScore)) * 100f);
+
+            bestScoreText.text = $"BEST SCORE {minutes:00}:{seconds:00}.{centiseconds:00}";
+        }
+
+        gameClearUI.SetActive(true);
     }
 }
