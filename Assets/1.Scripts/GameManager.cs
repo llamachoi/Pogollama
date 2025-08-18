@@ -6,18 +6,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public BoxCollider2D groundCollider;
+    public BoxCollider2D GroundCollider;
 
-    [HideInInspector] public bool isGameOver = false;
+    [HideInInspector] public bool IsGameOver = false;
     private bool canReset = false;
 
-    public TextMeshProUGUI timeText;
-    public float timeElapsed = 900f;
+    public TextMeshProUGUI TimeText;
+    public float TimeElapsed = 900f;
 
-    public GameObject gameOverUI;
-    public GameObject gameClearUI;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI bestScoreText;
+    public GameObject GameOverUI;
+    public GameObject GameClearUI;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI BestScoreText;
 
     private float currentScore;
     private float bestScore;
@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        gameOverUI.SetActive(false);
-        gameClearUI.SetActive(false);
+        GameOverUI.SetActive(false);
+        GameClearUI.SetActive(false);
 
         bestScore = PlayerPrefs.GetFloat("BestScore", 0);
     }
@@ -54,19 +54,19 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (!isGameOver) StartCoroutine(WaitForGameOver());
+        if (!IsGameOver) StartCoroutine(WaitForGameOver());
     }
 
     IEnumerator WaitForGameOver()
     {
-        isGameOver = true;
+        IsGameOver = true;
         AudioManager.Instance.StopBGM();
 
         yield return new WaitForSeconds(0.5f);
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.gameOverSound);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GameOverSound);
 
         canReset = true;
-        gameOverUI.SetActive(true);
+        GameOverUI.SetActive(true);
     }
 
     public void RestartGame()
@@ -76,35 +76,35 @@ public class GameManager : MonoBehaviour
 
     void UpdateTimeUI()
     {
-        if (isGameOver) return;
+        if (IsGameOver) return;
 
-        if (timeElapsed <= 0f)
+        if (TimeElapsed <= 0f)
         {
-            timeElapsed = 0f;
-            timeText.text = "00:00.00";
+            TimeElapsed = 0f;
+            TimeText.text = "00:00.00";
 
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.timeOverSound);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.TimeOverSound);
 
             GameOver();
             return;
         }
 
-        timeElapsed -= Time.deltaTime;
+        TimeElapsed -= Time.deltaTime;
 
-        int minutes = (int)(timeElapsed / 60f);
-        int seconds = (int)(timeElapsed % 60f);
-        int centiseconds = (int)((timeElapsed - Mathf.Floor(timeElapsed)) * 100f);
-        timeText.text = $"{minutes:00}:{seconds:00}.{centiseconds:00}";
+        int minutes = (int)(TimeElapsed / 60f);
+        int seconds = (int)(TimeElapsed % 60f);
+        int centiseconds = (int)((TimeElapsed - Mathf.Floor(TimeElapsed)) * 100f);
+        TimeText.text = $"{minutes:00}:{seconds:00}.{centiseconds:00}";
     }
 
     public void GameClear()
     {
-        if (!isGameOver) StartCoroutine(WaitForGameClear());
+        if (!IsGameOver) StartCoroutine(WaitForGameClear());
     }
 
     IEnumerator WaitForGameClear()
     {
-        isGameOver = true;
+        IsGameOver = true;
 
         yield return new WaitForSeconds(1f);
 
@@ -114,18 +114,18 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.gameClearSound);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.GameClearSound);
 
         canReset = true;
 
-        scoreText.text = timeText.text;
+        ScoreText.text = TimeText.text;
 
-        currentScore = timeElapsed;
+        currentScore = TimeElapsed;
 
         if (currentScore > bestScore)
         {
             bestScore = currentScore;
-            bestScoreText.text = "NEW RECORD!";
+            BestScoreText.text = "NEW RECORD!";
             PlayerPrefs.SetFloat("BestScore", bestScore);
             PlayerPrefs.Save();
         }
@@ -135,9 +135,9 @@ public class GameManager : MonoBehaviour
             int seconds = (int)(bestScore % 60f);
             int centiseconds = (int)((bestScore - Mathf.Floor(bestScore)) * 100f);
 
-            bestScoreText.text = $"BEST SCORE {minutes:00}:{seconds:00}.{centiseconds:00}";
+            BestScoreText.text = $"BEST SCORE {minutes:00}:{seconds:00}.{centiseconds:00}";
         }
 
-        gameClearUI.SetActive(true);
+        GameClearUI.SetActive(true);
     }
 }

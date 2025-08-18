@@ -4,26 +4,30 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    public AudioSource bgmSource;
-    public AudioSource sfxSource;
+    [Header("Audio Sources")]
+    public AudioSource BgmSource;
+    public AudioSource SfxSource;
 
-    public AudioClip bgmSound;
-    public AudioClip bounceSound;
-    public AudioClip crackSound;
-    public AudioClip destroySound;
-    public AudioClip addColorSound;
-    public AudioClip colorChangeSound;
-    public AudioClip respawnSound;
-    public AudioClip groundSound;
-    public AudioClip gameOverSound;
-    public AudioClip timeOverSound;
-    public AudioClip finalBounceSound;
-    public AudioClip gameClearSound;
+    [Header("BGM Clips")]
+    public AudioClip BgmSound;
+
+    [Header("SFX Clips")]
+    public AudioClip BounceSound;
+    public AudioClip CrackSound;
+    public AudioClip DestroySound;
+    public AudioClip AddColorSound;
+    public AudioClip ColorChangeSound;
+    public AudioClip RespawnSound;
+    public AudioClip GroundSound;
+    public AudioClip GameOverSound;
+    public AudioClip TimeOverSound;
+    public AudioClip FinalBounceSound;
+    public AudioClip GameClearSound;
 
     static private int[] playedIDs = new int[5];
     static private float[] lastPlayedTimes = new float[5];
     static private int playedCount = 0;
-    public float skipCoolTime = 0.05f;
+    public float SkipCoolTime = 0.05f;
 
     void Awake()
     {
@@ -44,25 +48,25 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBGM()
     {
-        if (bgmSource != null && bgmSound != null)
+        if (BgmSource != null && BgmSound != null)
         {
-            bgmSource.clip = bgmSound;
-            bgmSource.loop = true;
-            bgmSource.Play();
+            BgmSource.clip = BgmSound;
+            BgmSource.loop = true;
+            BgmSource.Play();
         }
     }
 
     public void StopBGM()
     {
-        if (bgmSource != null)
+        if (BgmSource != null)
         {
-            bgmSource.Stop();
+            BgmSource.Stop();
         }
     }
 
     public void PlaySFX(AudioClip clip)
     {
-        if (sfxSource == null || clip == null) return;
+        if (SfxSource == null || clip == null) return;
 
         int id = clip.GetInstanceID();
         float now = Time.unscaledTime;
@@ -71,10 +75,10 @@ public class AudioManager : MonoBehaviour
         {
             if (playedIDs[i] == id)
             {
-                if (now - lastPlayedTimes[i] < skipCoolTime) return;
+                if (now - lastPlayedTimes[i] < SkipCoolTime) return;
 
                 lastPlayedTimes[i] = now;
-                sfxSource.PlayOneShot(clip);
+                SfxSource.PlayOneShot(clip);
                 return;
             }
         }
@@ -86,6 +90,6 @@ public class AudioManager : MonoBehaviour
             playedCount++;
         }
 
-        sfxSource.PlayOneShot(clip);
+        SfxSource.PlayOneShot(clip);
     }
 }

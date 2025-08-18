@@ -1,4 +1,4 @@
-public enum platformType
+public enum PlatformType
 {
     Normal,
     Cracked,
@@ -6,7 +6,7 @@ public enum platformType
     Finish
 }
 
-public enum platformColor
+public enum PlatformColor
 {
     Red,
     Orange,

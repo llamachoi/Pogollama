@@ -12,13 +12,13 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        pogoTipRenderer.color = ColorManager.colors[0];
+        pogoTipRenderer.color = ColorManager.Instance.Colors[0];
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (GameManager.Instance.isGameOver)
+        if (GameManager.Instance.IsGameOver)
         {
             HandleGameOver();
             return;
@@ -55,10 +55,10 @@ public class PlayerController : MonoBehaviour
 
     void ChangePogoColor()
     {
-        int nextColorIndex = (ColorManager.currentColorIndex + 1) % ColorManager.totalColors;
-        ColorManager.currentColorIndex = nextColorIndex;
-        pogoTipRenderer.color = ColorManager.colors[ColorManager.currentColorIndex];
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.colorChangeSound);
+        int nextColorIndex = (ColorManager.Instance.CurrentColorIndex + 1) % ColorManager.Instance.TotalColors;
+        ColorManager.Instance.CurrentColorIndex = nextColorIndex;
+        pogoTipRenderer.color = ColorManager.Instance.Colors[ColorManager.Instance.CurrentColorIndex];
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.ColorChangeSound);
     }
 
     void HandleGameOver()

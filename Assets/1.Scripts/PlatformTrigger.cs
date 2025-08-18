@@ -3,45 +3,45 @@ using System;
 
 public class PlatformTrigger : MonoBehaviour
 {
-    public float baseBounceForce = 3.5f;
+    public float BaseBounceForce = 3.5f;
  
-    public SpriteRenderer platformRenderer;
-    public platformColor currentPlatformColor;
-    public platformType currentPlatformType;
+    public SpriteRenderer PlatformRenderer;
+    public PlatformColor CurrentPlatformColor;
+    public PlatformType CurrentPlatformType;
 
     private bool hasAddedColor = false;
 
     [Range(0, 3)]
-    public int setCrackCount;
-    public int currentCrackCount;
+    public int SetCrackCount;
+    public int CurrentCrackCount;
     private int maxCrackCount = 4;
 
-    public float finishAscendSpeed = 5f;
-    public float finishDuration = 5f;
+    public float FinishAscendSpeed = 5f;
+    public float FinishDuration = 5f;
     private bool isFinishing = false;
 
     private void Start()
     {
-        platformRenderer = gameObject.GetComponent<SpriteRenderer>();
+        PlatformRenderer = gameObject.GetComponent<SpriteRenderer>();
 
-        switch (currentPlatformType)
+        switch (CurrentPlatformType)
         {
-            case platformType.Normal:
-                platformRenderer.color = ColorManager.colors[(int)currentPlatformColor];
+            case PlatformType.Normal:
+                PlatformRenderer.color = ColorManager.Instance.Colors[(int)CurrentPlatformColor];
                 break;
-            case platformType.Cracked:
-                currentCrackCount = setCrackCount;
-                platformRenderer.color = ColorManager.colors[(int)currentPlatformColor];
-                platformRenderer.sprite = PlatformManager.Instance.crackedPlatformSprites[currentCrackCount];
+            case PlatformType.Cracked:
+                CurrentCrackCount = SetCrackCount;
+                PlatformRenderer.color = ColorManager.Instance.Colors[(int)CurrentPlatformColor];
+                PlatformRenderer.sprite = PlatformManager.Instance.CrackedPlatformSprites[CurrentCrackCount];
                 break;
-            case platformType.Rainbow:
-                platformRenderer.color = Color.white;
-                platformRenderer.sprite = PlatformManager.Instance.rainbowPlatformSprite;
+            case PlatformType.Rainbow:
+                PlatformRenderer.color = Color.white;
+                PlatformRenderer.sprite = PlatformManager.Instance.RainbowPlatformSprite;
                 break;
-            case platformType.Finish:
+            case PlatformType.Finish:
                 break;
             default:
-                Debug.LogWarning("Unknown platform type: " + currentPlatformType);
+                Debug.LogWarning("Unknown platform type: " + CurrentPlatformType);
                 break;
         }
     }
@@ -50,25 +50,25 @@ public class PlatformTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            bool colorMatch = ((int)currentPlatformColor == ColorManager.currentColorIndex);
+            bool colorMatch = ((int)CurrentPlatformColor == ColorManager.Instance.CurrentColorIndex);
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
 
-            switch (currentPlatformType)
+            switch (CurrentPlatformType)
             {
-                case platformType.Normal:
+                case PlatformType.Normal:
                     if (!colorMatch) return;
                     Bounce(rb);
                     break;
-                case platformType.Cracked:
+                case PlatformType.Cracked:
                     if (!colorMatch) return;
                     Bounce(rb);
                     HandleCrack();
                     break;
-                case platformType.Rainbow:
+                case PlatformType.Rainbow:
                     Bounce(rb);
                     HandleRainbow();
                     break;
-                case platformType.Finish:
+                case PlatformType.Finish:
                     HandleFinish(rb);
                     break;
             }
@@ -77,17 +77,17 @@ public class PlatformTrigger : MonoBehaviour
 
     private void Bounce(Rigidbody2D rb)
     {
-        rb.linearVelocity = transform.up * baseBounceForce;
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.bounceSound);
+        rb.linearVelocity = transform.up * BaseBounceForce;
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.BounceSound);
     }
 
     private void HandleCrack()
     {
-        currentCrackCount++;
+        CurrentCrackCount++;
 
-        if (currentCrackCount >= maxCrackCount)
+        if (CurrentCrackCount >= maxCrackCount)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.destroySound);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.DestroySound);
 
             PlatformManager.Instance.ReactivatePlatform(gameObject, 5f); //gameObject가 비활성화 될 경우, 현재 스크립트도 비활성화 됩니다. 따라서 매니저를 통해 다시 활성화를 요청합니다.
 
@@ -95,8 +95,8 @@ public class PlatformTrigger : MonoBehaviour
         }
         else
         {
-            platformRenderer.sprite = PlatformManager.Instance.crackedPlatformSprites[currentCrackCount];
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.crackSound);
+            PlatformRenderer.sprite = PlatformManager.Instance.CrackedPlatformSprites[CurrentCrackCount];
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.CrackSound);
         }
     }
 
@@ -104,10 +104,10 @@ public class PlatformTrigger : MonoBehaviour
     {
         if (hasAddedColor) return;
 
-        if (ColorManager.totalColors < ColorManager.colors.Length)
+        if (ColorManager.Instance.TotalColors < ColorManager.Instance.Colors.Length)
         {
-            ColorManager.totalColors++;
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.addColorSound);
+            ColorManager.Instance.TotalColors++;
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.AddColorSound);
             hasAddedColor = true;
         }
     }
@@ -117,10 +117,10 @@ public class PlatformTrigger : MonoBehaviour
         if (isFinishing) return;
         isFinishing = true;
 
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.finalBounceSound);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.FinalBounceSound);
 
         rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.linearVelocity = Vector2.up * baseBounceForce;
+        rb.linearVelocity = Vector2.up * BaseBounceForce;
 
         GameManager.Instance.GameClear();
     }

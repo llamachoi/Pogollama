@@ -1427,28 +1427,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46a5301005b74d419c5e48c5b65c050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1834607364}
-  followSpeed: 5
-  minY: 0
-  minHeight: 0
-  maxHeight: 75
-  backgroundGradient:
+  Target: {fileID: 0}
+  FollowSpeed: 5
+  CameraMinHeight: 0
+  SkyMinHeight: 0
+  SkyMaxHeight: 20
+  BackgroundGradient:
     serializedVersion: 2
-    key0: {r: 0.2783019, g: 0.69761544, b: 1, a: 1}
-    key1: {r: 0.21236819, g: 0.5170402, b: 0.7396531, a: 1}
-    key2: {r: 1, g: 0.9278084, b: 0.19339621, a: 0}
-    key3: {r: 1, g: 0.52035326, b: 0.3443396, a: 0}
-    key4: {r: 0.7254902, g: 0.20784311, b: 0.21281311, a: 0}
-    key5: {r: 0.26695952, g: 0, b: 0.77254903, a: 0}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 9830
-    ctime2: 19661
-    ctime3: 29491
-    ctime4: 39321
-    ctime5: 49151
-    ctime6: 65535
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
     ctime7: 0
     atime0: 0
     atime1: 65535
@@ -1460,7 +1460,7 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 7
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
 --- !u!114 &221704693
 MonoBehaviour:
@@ -1575,14 +1575,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee15cb8ac97ad745ad724d3bdfdd275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorPalette:
-  - {r: 1, g: 0.25, b: 0.25, a: 1}
-  - {r: 1, g: 0.56984055, b: 0.18396229, a: 1}
-  - {r: 1, g: 0.8913997, b: 0.2216981, a: 1}
-  - {r: 0.39772573, g: 1, b: 0.1462264, a: 1}
-  - {r: 0.19339621, g: 0.6310884, b: 1, a: 1}
-  - {r: 0.35710108, g: 0.2971698, b: 1, a: 1}
-  - {r: 0.74265015, g: 0.2783019, b: 1, a: 1}
+  CurrentColorIndex: 0
+  Colors:
+  - {r: 0.9450981, g: 0.2509804, b: 0.24313727, a: 1}
+  - {r: 0.9686275, g: 0.5647059, b: 0.10980393, a: 1}
+  - {r: 0.9725491, g: 0.8705883, b: 0.14901961, a: 1}
+  - {r: 0.4901961, g: 0.97647065, b: 0.098039225, a: 1}
+  - {r: 0.30588236, g: 0.6313726, b: 0.9803922, a: 1}
+  - {r: 0.37647063, g: 0.31764707, b: 0.9803922, a: 1}
+  - {r: 0.72156864, g: 0.2784314, b: 0.9960785, a: 1}
+  TotalColors: 7
   startColors: 3
 --- !u!4 &228768415
 Transform:
@@ -1633,14 +1635,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827a3e3b564dfb34aa0a08b0242deae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCollider: {fileID: 732390418}
-  isGameOver: 0
-  timeText: {fileID: 2061479649}
-  timeElapsed: 600
-  gameOverUI: {fileID: 1912311906}
-  gameClearUI: {fileID: 930994806}
-  scoreText: {fileID: 1414826136}
-  bestScoreText: {fileID: 885421766}
+  GroundCollider: {fileID: 732390418}
+  IsGameOver: 0
+  TimeText: {fileID: 2061479649}
+  TimeElapsed: 900
+  GameOverUI: {fileID: 1912311906}
+  GameClearUI: {fileID: 930994806}
+  ScoreText: {fileID: 1414826136}
+  BestScoreText: {fileID: 885421766}
 --- !u!114 &228768418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,10 +1655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71b623827585ea4eb3f94c9f83dd494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalPlatformSprite: {fileID: 21300000, guid: 98394083f01e4b74c9ae04d8f53fca72, type: 3}
-  rainbowPlatformSprite: {fileID: 21300000, guid: 3fa165dd56cb0b74b8235a9c8229f84b, type: 3}
-  crackedPlatformSprites:
-  - {fileID: 21300000, guid: 98394083f01e4b74c9ae04d8f53fca72, type: 3}
+  RainbowPlatformSprite: {fileID: 21300000, guid: 3fa165dd56cb0b74b8235a9c8229f84b, type: 3}
+  CrackedPlatformSprites:
   - {fileID: -2230313377047844854, guid: 646444b0ec6cb6c49b6c8f67c008cae5, type: 3}
   - {fileID: 1340153877, guid: 646444b0ec6cb6c49b6c8f67c008cae5, type: 3}
   - {fileID: 1436037283, guid: 646444b0ec6cb6c49b6c8f67c008cae5, type: 3}
@@ -2480,21 +2480,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04fd3c2c1b336446a24b6c6013e45d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSource: {fileID: 449952527}
-  sfxSource: {fileID: 449952526}
-  bgmSound: {fileID: 8300000, guid: ae42835c514144148a22fa729df747b0, type: 3}
-  bounceSound: {fileID: 8300000, guid: 1c7a3a82aa2b7d14f87959107828036c, type: 3}
-  crackSound: {fileID: 8300000, guid: 44eabe2c472890d44a8d3c5a1024222f, type: 3}
-  destroySound: {fileID: 8300000, guid: a961e5d3315089143895bf1e57d29910, type: 3}
-  addColorSound: {fileID: 8300000, guid: bc0dbecb48a7f2f4b929257bca259a20, type: 3}
-  colorChangeSound: {fileID: 8300000, guid: c73e080eb81d7b24588d8ada5668ec13, type: 3}
-  respawnSound: {fileID: 8300000, guid: 78743e5dd21c9f54da30255e21be0500, type: 3}
-  groundSound: {fileID: 8300000, guid: c717e68876069b64f968af0cd606bcda, type: 3}
-  gameOverSound: {fileID: 8300000, guid: 0245f8c59d562644d8ef2b1444098422, type: 3}
-  timeOverSound: {fileID: 8300000, guid: 817832f905fe2564c8efe51b476994d3, type: 3}
-  finalBounceSound: {fileID: 8300000, guid: 8f96d1394e25e1d49b6cdb60c2a30a12, type: 3}
-  gameClearSound: {fileID: 8300000, guid: de8315681bda9c6448e64e78dd6ee709, type: 3}
-  skipCoolTime: 0.05
+  BgmSource: {fileID: 0}
+  SfxSource: {fileID: 0}
+  BgmSound: {fileID: 0}
+  BounceSound: {fileID: 0}
+  CrackSound: {fileID: 0}
+  DestroySound: {fileID: 0}
+  AddColorSound: {fileID: 0}
+  ColorChangeSound: {fileID: 0}
+  RespawnSound: {fileID: 0}
+  GroundSound: {fileID: 0}
+  GameOverSound: {fileID: 0}
+  TimeOverSound: {fileID: 0}
+  FinalBounceSound: {fileID: 0}
+  GameClearSound: {fileID: 0}
+  SkipCoolTime: 0.05
 --- !u!1 &479872888
 GameObject:
   m_ObjectHideFlags: 0

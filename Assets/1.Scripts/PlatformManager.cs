@@ -4,9 +4,8 @@ using System.Collections;
 public class PlatformManager : MonoBehaviour
 {
     public static PlatformManager Instance { get; private set; }
-    public Sprite normalPlatformSprite;
-    public Sprite rainbowPlatformSprite;
-    public Sprite[] crackedPlatformSprites;
+    public Sprite RainbowPlatformSprite;
+    public Sprite[] CrackedPlatformSprites;
 
     private void Awake()
     {
@@ -36,12 +35,12 @@ public class PlatformManager : MonoBehaviour
 
         yield return null; // 한 프레임 대기
 
-        platformTrigger.currentCrackCount = platformTrigger.setCrackCount;
-        platformTrigger.platformRenderer.sprite = crackedPlatformSprites[platformTrigger.currentCrackCount];
+        platformTrigger.CurrentCrackCount = platformTrigger.SetCrackCount;
+        platformTrigger.PlatformRenderer.sprite = CrackedPlatformSprites[platformTrigger.CurrentCrackCount];
 
-        if (platformTrigger.platformRenderer.isVisible)
+        if (platformTrigger.PlatformRenderer.isVisible)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.respawnSound);
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.RespawnSound);
         }
     }
 }
