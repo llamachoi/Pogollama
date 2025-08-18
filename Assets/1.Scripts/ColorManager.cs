@@ -3,15 +3,10 @@ using UnityEngine;
 public class ColorManager : MonoBehaviour
 {
     public static int currentColorIndex;
-    
     [SerializeField] private Color[] colorPalette;
-
     public static Color[] colors;
-
     public static ColorManager Instance { get; private set; }
-
     public static int totalColors;
-
     public int startColors = 3;
 
     private void Awake()
