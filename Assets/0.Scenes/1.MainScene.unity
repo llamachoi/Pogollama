@@ -1427,26 +1427,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46a5301005b74d419c5e48c5b65c050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  Target: {fileID: 1834607364}
   FollowSpeed: 5
   CameraMinHeight: 0
   SkyMinHeight: 0
-  SkyMaxHeight: 20
+  SkyMaxHeight: 75
   BackgroundGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0, g: 0.54588175, b: 1, a: 1}
+    key1: {r: 0.30588236, g: 0.6313726, b: 0.9803922, a: 1}
+    key2: {r: 1, g: 0.4672882, b: 0, a: 0}
+    key3: {r: 0.37647063, g: 0.31764707, b: 0.9803922, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
+    ctime1: 11372
+    ctime2: 28720
+    ctime3: 51272
+    ctime4: 65535
     ctime5: 0
     ctime6: 0
     ctime7: 0
@@ -1460,7 +1460,7 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 2
+    m_NumColorKeys: 5
     m_NumAlphaKeys: 2
 --- !u!114 &221704693
 MonoBehaviour:
@@ -2480,20 +2480,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04fd3c2c1b336446a24b6c6013e45d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BgmSource: {fileID: 0}
-  SfxSource: {fileID: 0}
-  BgmSound: {fileID: 0}
-  BounceSound: {fileID: 0}
-  CrackSound: {fileID: 0}
-  DestroySound: {fileID: 0}
-  AddColorSound: {fileID: 0}
-  ColorChangeSound: {fileID: 0}
-  RespawnSound: {fileID: 0}
-  GroundSound: {fileID: 0}
-  GameOverSound: {fileID: 0}
-  TimeOverSound: {fileID: 0}
-  FinalBounceSound: {fileID: 0}
-  GameClearSound: {fileID: 0}
+  BgmSource: {fileID: 449952527}
+  SfxSource: {fileID: 449952526}
+  BgmSound: {fileID: 8300000, guid: ae42835c514144148a22fa729df747b0, type: 3}
+  BounceSound: {fileID: 8300000, guid: 1c7a3a82aa2b7d14f87959107828036c, type: 3}
+  CrackSound: {fileID: 8300000, guid: 44eabe2c472890d44a8d3c5a1024222f, type: 3}
+  DestroySound: {fileID: 8300000, guid: a961e5d3315089143895bf1e57d29910, type: 3}
+  AddColorSound: {fileID: 8300000, guid: bc0dbecb48a7f2f4b929257bca259a20, type: 3}
+  ColorChangeSound: {fileID: 8300000, guid: c73e080eb81d7b24588d8ada5668ec13, type: 3}
+  RespawnSound: {fileID: 8300000, guid: 78743e5dd21c9f54da30255e21be0500, type: 3}
+  GroundSound: {fileID: 8300000, guid: c717e68876069b64f968af0cd606bcda, type: 3}
+  GameOverSound: {fileID: 8300000, guid: 0245f8c59d562644d8ef2b1444098422, type: 3}
+  TimeOverSound: {fileID: 8300000, guid: 817832f905fe2564c8efe51b476994d3, type: 3}
+  FinalBounceSound: {fileID: 8300000, guid: 8f96d1394e25e1d49b6cdb60c2a30a12, type: 3}
+  GameClearSound: {fileID: 8300000, guid: de8315681bda9c6448e64e78dd6ee709, type: 3}
   SkipCoolTime: 0.05
 --- !u!1 &479872888
 GameObject:

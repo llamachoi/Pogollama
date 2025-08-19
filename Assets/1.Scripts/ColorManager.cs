@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ColorManager : MonoBehaviour
 {
-    public int CurrentColorIndex;
+    public PlatformColor CurrentColorIndex;
     public Color[] Colors;
     public static ColorManager Instance { get; private set; }
     [HideInInspector] public int TotalColors;
@@ -23,5 +23,15 @@ public class ColorManager : MonoBehaviour
     private void Start()
     {
         TotalColors = startColors;
+    }
+
+    public Color GetPogoColor()
+    {
+        int nextColorIndex = ((int)CurrentColorIndex + 1) % TotalColors;
+        CurrentColorIndex = (PlatformColor)nextColorIndex;
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.ColorChangeSound);
+
+        return Colors[(int)CurrentColorIndex];
     }
 }

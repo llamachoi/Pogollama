@@ -50,7 +50,8 @@ public class PlatformTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            bool colorMatch = ((int)CurrentPlatformColor == ColorManager.Instance.CurrentColorIndex);
+            bool colorMatch = (CurrentPlatformColor == ColorManager.Instance.CurrentColorIndex);
+
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
 
             switch (CurrentPlatformType)

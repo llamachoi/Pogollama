@@ -92,10 +92,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f165a409a99519d4ba84af6d203bf674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseBounceForce: 3.5
-  currentPlatformColor: 4
-  currentPlatformType: 1
-  setCrackCount: 0
+  BaseBounceForce: 3.5
+  PlatformRenderer: {fileID: 0}
+  CurrentPlatformColor: 4
+  CurrentPlatformType: 1
+  SetCrackCount: 0
+  CurrentCrackCount: 0
+  FinishAscendSpeed: 5
+  FinishDuration: 5
 --- !u!212 &7245729647515976685
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -243,10 +247,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f165a409a99519d4ba84af6d203bf674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseBounceForce: 3.5
-  currentPlatformColor: 4
-  currentPlatformType: 1
-  setCrackCount: 0
+  BaseBounceForce: 3.5
+  PlatformRenderer: {fileID: 0}
+  CurrentPlatformColor: 4
+  CurrentPlatformType: 1
+  SetCrackCount: 0
+  CurrentCrackCount: 0
+  FinishAscendSpeed: 5
+  FinishDuration: 5
 --- !u!212 &3125419575792410155
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -428,10 +436,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f165a409a99519d4ba84af6d203bf674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseBounceForce: 3.5
-  currentPlatformColor: 4
-  currentPlatformType: 1
-  setCrackCount: 0
+  BaseBounceForce: 3.5
+  PlatformRenderer: {fileID: 0}
+  CurrentPlatformColor: 4
+  CurrentPlatformType: 1
+  SetCrackCount: 0
+  CurrentCrackCount: 0
+  FinishAscendSpeed: 5
+  FinishDuration: 5
 --- !u!212 &834771078895725686
 SpriteRenderer:
   m_ObjectHideFlags: 0

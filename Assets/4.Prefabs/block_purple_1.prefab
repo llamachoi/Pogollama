@@ -92,10 +92,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f165a409a99519d4ba84af6d203bf674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseBounceForce: 3.5
-  currentPlatformColor: 6
-  currentPlatformType: 0
-  setCrackCount: 0
+  BaseBounceForce: 3.5
+  PlatformRenderer: {fileID: 0}
+  CurrentPlatformColor: 6
+  CurrentPlatformType: 0
+  SetCrackCount: 0
+  CurrentCrackCount: 0
+  FinishAscendSpeed: 5
+  FinishDuration: 5
 --- !u!212 &6726608797941714107
 SpriteRenderer:
   m_ObjectHideFlags: 0

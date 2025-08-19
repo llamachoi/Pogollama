@@ -18,29 +18,19 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.IsGameOver)
-        {
-            HandleGameOver();
-            return;
-        }
+        if (GameManager.Instance.IsGameOver) { HandleGameOver(); return; }
 
         float move = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
         Vector3 newPosition = transform.position + Vector3.right * move;
 
-        if (newPosition.x < -rangeX)
-        {
-            newPosition.x = rangeX;
-        }
-        else if (newPosition.x > rangeX)
-        {
-            newPosition.x = -rangeX;
-        }
+        if (newPosition.x < -rangeX) newPosition.x = rangeX;
+        else if (newPosition.x > rangeX) newPosition.x = -rangeX;
 
         transform.position = newPosition;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ChangePogoColor();
+            pogoTipRenderer.color = ColorManager.Instance.GetPogoColor();
         }
     }
 
@@ -51,14 +41,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, maxFallSpeed);
         }
-    }
-
-    void ChangePogoColor()
-    {
-        int nextColorIndex = (ColorManager.Instance.CurrentColorIndex + 1) % ColorManager.Instance.TotalColors;
-        ColorManager.Instance.CurrentColorIndex = nextColorIndex;
-        pogoTipRenderer.color = ColorManager.Instance.Colors[ColorManager.Instance.CurrentColorIndex];
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.ColorChangeSound);
     }
 
     void HandleGameOver()

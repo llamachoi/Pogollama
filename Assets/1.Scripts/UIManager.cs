@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
             UIPogoTip[i].GetComponent<Image>().color = ColorManager.Instance.Colors[i];
             UIPogoTip[i].SetActive(true);
 
-            pogoTipOutlines[i].enabled = (i == ColorManager.Instance.CurrentColorIndex);
+            pogoTipOutlines[i].enabled = (i == (int)ColorManager.Instance.CurrentColorIndex);
         }
     }
 }
