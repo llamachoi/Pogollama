@@ -10,18 +10,31 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer pogoTipRenderer;
     private Rigidbody2D rb;
 
+    public HoldButton leftButton;
+    public HoldButton rightButton;
+
     private void Start()
     {
         pogoTipRenderer.color = ColorManager.Instance.Colors[0];
         rb = GetComponent<Rigidbody2D>();
     }
 
+    public void ChangeColor()
+    {
+        pogoTipRenderer.color = ColorManager.Instance.GetPogoColor();
+    }
+
     void Update()
     {
         if (GameManager.Instance.IsGameOver) { HandleGameOver(); return; }
 
-        float move = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
-        Vector3 newPosition = transform.position + Vector3.right * move;
+        float move = Input.GetAxisRaw("Horizontal"); // 키보드 입력
+
+        // UI 버튼 입력도 합쳐줌
+        if (leftButton.isPressed) move = -1f;
+        if (rightButton.isPressed) move = 1f;
+
+        Vector3 newPosition = transform.position + Vector3.right * move * moveSpeed * Time.deltaTime;
 
         if (newPosition.x < -rangeX) newPosition.x = rangeX;
         else if (newPosition.x > rangeX) newPosition.x = -rangeX;
@@ -36,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Y속도가 maxFallSpeed보다 작아지면(더 빨라지면) 제한
         if (rb.linearVelocity.y < maxFallSpeed)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, maxFallSpeed);

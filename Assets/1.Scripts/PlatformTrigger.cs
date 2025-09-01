@@ -4,10 +4,10 @@ using System.Collections;
 
 public class PlatformTrigger : MonoBehaviour
 {
+    public PlatformRenderer PlatformRendererData;
     public float BaseBounceForce = 3.5f;
  
     private SpriteRenderer PlatformRenderer;
-    public Sprite[] CrackedPlatformSprites;
 
     public PlatformColor CurrentPlatformColor;
     public PlatformType CurrentPlatformType;
@@ -32,7 +32,7 @@ public class PlatformTrigger : MonoBehaviour
         {
             CurrentCrackCount = SetCrackCount;
             PlatformRenderer = gameObject.GetComponent<SpriteRenderer>();
-            PlatformRenderer.sprite = CrackedPlatformSprites[CurrentCrackCount];
+            PlatformRenderer.sprite = PlatformRendererData.CrackedPlatformSprites[CurrentCrackCount];
         }
     }
 
@@ -82,7 +82,7 @@ public class PlatformTrigger : MonoBehaviour
         }
         else
         {
-            PlatformRenderer.sprite = CrackedPlatformSprites[CurrentCrackCount];
+            PlatformRenderer.sprite = PlatformRendererData.CrackedPlatformSprites[CurrentCrackCount];
             AudioManager.Instance.PlaySFX(AudioManager.Instance.CrackSound);
         }
     }
@@ -122,7 +122,7 @@ public class PlatformTrigger : MonoBehaviour
         if (!isActive) // ²¨Á®ÀÖ´ø °É ´Ù½Ã Ä×À» ¶§
         {
             CurrentCrackCount = SetCrackCount;
-            PlatformRenderer.sprite = CrackedPlatformSprites[CurrentCrackCount];
+            PlatformRenderer.sprite = PlatformRendererData.CrackedPlatformSprites[CurrentCrackCount];
 
             AudioManager.Instance.PlaySFX(AudioManager.Instance.RespawnSound);
         }

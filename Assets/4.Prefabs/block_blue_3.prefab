@@ -92,12 +92,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f165a409a99519d4ba84af6d203bf674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlatformRendererData: {fileID: 11400000, guid: 6153b482dbca1894aa48cab02c870c61, type: 2}
   BaseBounceForce: 3.5
-  PlatformRenderer: {fileID: 0}
   CurrentPlatformColor: 4
   CurrentPlatformType: 0
   SetCrackCount: 0
   CurrentCrackCount: 0
+  respawnTime: 5
   FinishAscendSpeed: 5
   FinishDuration: 5
 --- !u!212 &2032185725464268199
