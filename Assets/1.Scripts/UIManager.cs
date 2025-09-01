@@ -24,12 +24,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdatePogoTipColor()
     {
-        for (int i = 0; i < ColorManager.Instance.TotalColors; i++)
+        for (int i = 0; i < ColorManager.Instance.CurrentTotalColors; i++)
         {
             UIPogoTip[i].GetComponent<Image>().color = ColorManager.Instance.Colors[i];
             UIPogoTip[i].SetActive(true);
 
-            pogoTipOutlines[i].enabled = (i == (int)ColorManager.Instance.CurrentColorIndex);
+            pogoTipOutlines[i].enabled = (i == (int)ColorManager.Instance.CurrentColor);
         }
     }
 }

@@ -1,11 +1,14 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class PlatformTrigger : MonoBehaviour
 {
     public float BaseBounceForce = 3.5f;
  
-    public SpriteRenderer PlatformRenderer;
+    private SpriteRenderer PlatformRenderer;
+    public Sprite[] CrackedPlatformSprites;
+
     public PlatformColor CurrentPlatformColor;
     public PlatformType CurrentPlatformType;
 
@@ -13,8 +16,10 @@ public class PlatformTrigger : MonoBehaviour
 
     [Range(0, 3)]
     public int SetCrackCount;
-    public int CurrentCrackCount;
+
+    [HideInInspector] public int CurrentCrackCount;
     private int maxCrackCount = 4;
+    public float respawnTime = 5;
 
     public float FinishAscendSpeed = 5f;
     public float FinishDuration = 5f;
@@ -22,27 +27,12 @@ public class PlatformTrigger : MonoBehaviour
 
     private void Start()
     {
-        PlatformRenderer = gameObject.GetComponent<SpriteRenderer>();
-
-        switch (CurrentPlatformType)
+        //CrackedPlatform 타입 플랫폼의 경우 데이터 초기화
+        if (CurrentPlatformType == PlatformType.Cracked)
         {
-            case PlatformType.Normal:
-                PlatformRenderer.color = ColorManager.Instance.Colors[(int)CurrentPlatformColor];
-                break;
-            case PlatformType.Cracked:
-                CurrentCrackCount = SetCrackCount;
-                PlatformRenderer.color = ColorManager.Instance.Colors[(int)CurrentPlatformColor];
-                PlatformRenderer.sprite = PlatformManager.Instance.CrackedPlatformSprites[CurrentCrackCount];
-                break;
-            case PlatformType.Rainbow:
-                PlatformRenderer.color = Color.white;
-                PlatformRenderer.sprite = PlatformManager.Instance.RainbowPlatformSprite;
-                break;
-            case PlatformType.Finish:
-                break;
-            default:
-                Debug.LogWarning("Unknown platform type: " + CurrentPlatformType);
-                break;
+            CurrentCrackCount = SetCrackCount;
+            PlatformRenderer = gameObject.GetComponent<SpriteRenderer>();
+            PlatformRenderer.sprite = CrackedPlatformSprites[CurrentCrackCount];
         }
     }
 
@@ -50,8 +40,7 @@ public class PlatformTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            bool colorMatch = (CurrentPlatformColor == ColorManager.Instance.CurrentColorIndex);
-
+            bool colorMatch = (CurrentPlatformColor == ColorManager.Instance.CurrentColor);
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
 
             switch (CurrentPlatformType)
@@ -89,14 +78,11 @@ public class PlatformTrigger : MonoBehaviour
         if (CurrentCrackCount >= maxCrackCount)
         {
             AudioManager.Instance.PlaySFX(AudioManager.Instance.DestroySound);
-
-            PlatformManager.Instance.ReactivatePlatform(gameObject, 5f); //gameObject가 비활성화 될 경우, 현재 스크립트도 비활성화 됩니다. 따라서 매니저를 통해 다시 활성화를 요청합니다.
-
-            gameObject.SetActive(false);
+            StartCoroutine(ActivatePlatformAfterSeconds(respawnTime));
         }
         else
         {
-            PlatformRenderer.sprite = PlatformManager.Instance.CrackedPlatformSprites[CurrentCrackCount];
+            PlatformRenderer.sprite = CrackedPlatformSprites[CurrentCrackCount];
             AudioManager.Instance.PlaySFX(AudioManager.Instance.CrackSound);
         }
     }
@@ -105,9 +91,9 @@ public class PlatformTrigger : MonoBehaviour
     {
         if (hasAddedColor) return;
 
-        if (ColorManager.Instance.TotalColors < ColorManager.Instance.Colors.Length)
+        if (ColorManager.Instance.CurrentTotalColors < ColorManager.Instance.Colors.Length)
         {
-            ColorManager.Instance.TotalColors++;
+            ColorManager.Instance.CurrentTotalColors++;
             AudioManager.Instance.PlaySFX(AudioManager.Instance.AddColorSound);
             hasAddedColor = true;
         }
@@ -124,5 +110,28 @@ public class PlatformTrigger : MonoBehaviour
         rb.linearVelocity = Vector2.up * BaseBounceForce;
 
         GameManager.Instance.GameClear();
+    }
+
+    private void ActivatePlatform()
+    {
+        bool isActive = PlatformRenderer.enabled;
+
+        PlatformRenderer.enabled = !isActive;
+        gameObject.GetComponent<BoxCollider2D>().enabled = !isActive;
+
+        if (!isActive) // 꺼져있던 걸 다시 켰을 때
+        {
+            CurrentCrackCount = SetCrackCount;
+            PlatformRenderer.sprite = CrackedPlatformSprites[CurrentCrackCount];
+
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.RespawnSound);
+        }
+    }
+
+    IEnumerator ActivatePlatformAfterSeconds(float respawnTime)
+    {
+        ActivatePlatform();
+        yield return new WaitForSeconds(respawnTime);
+        ActivatePlatform();
     }
 }

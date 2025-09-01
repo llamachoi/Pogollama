@@ -6,8 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public BoxCollider2D GroundCollider;
-
     [HideInInspector] public bool IsGameOver = false;
     private bool canReset = false;
 

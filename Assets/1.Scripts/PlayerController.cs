@@ -50,4 +50,5 @@ public class PlayerController : MonoBehaviour
         if (playerCollider.enabled) playerCollider.enabled = false;
         if (transform.position.y < minY && gameObject.activeSelf) gameObject.SetActive(false);
     }
+
 }
