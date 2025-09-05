@@ -78,7 +78,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.256, y: 0.05}
+  m_Size: {x: 0.25, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &5171791430618450560
 MonoBehaviour:
@@ -234,7 +234,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.256, y: 0.05}
+  m_Size: {x: 0.25, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &4498185103358347179
 MonoBehaviour:
@@ -252,7 +252,7 @@ MonoBehaviour:
   BaseBounceForce: 3.5
   CurrentPlatformColor: 4
   CurrentPlatformType: 1
-  SetCrackCount: 1
+  SetCrackCount: 0
   CurrentCrackCount: 0
   respawnTime: 5
   FinishAscendSpeed: 5
@@ -424,7 +424,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.256, y: 0.05}
+  m_Size: {x: 0.25, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &8924338008820191611
 MonoBehaviour:

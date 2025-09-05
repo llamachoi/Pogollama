@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlatformTrigger : MonoBehaviour
 {
-    public PlatformRenderer PlatformRendererData;
+    public PlatformData PlatformRendererData;
     public float BaseBounceForce = 3.5f;
  
     private SpriteRenderer PlatformRenderer;

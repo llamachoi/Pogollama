@@ -1,11 +1,13 @@
-using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class PlatformSpawner : MonoBehaviour
 {
-    [Header("Prefabs")]
-    public GameObject[] platformPrefabs;
-    public GameObject rainbowPlatformPrefab;
+    public PlatformData PlatformData;
+
+    private GameObject[] platformPrefabs;
+    private GameObject rainbowPlatformPrefab;
 
     [Header("Local Spawn Range (로컬 좌표)")]
     public Vector2 xRangeLocal = new Vector2(-2f, 2f);
@@ -26,6 +28,12 @@ public class PlatformSpawner : MonoBehaviour
 
     private bool hasGenerated;
     private List<Vector2> spawnedPositions = new List<Vector2>(); // 생성 좌표 기록
+
+    private void Awake()
+    {
+        platformPrefabs = PlatformData.SpawnPrefabs.ToArray();
+        rainbowPlatformPrefab = PlatformData.RainbowSpawnPrefabs;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

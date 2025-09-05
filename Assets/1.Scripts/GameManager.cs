@@ -27,7 +27,9 @@ public class GameManager : MonoBehaviour
     [Range (0, 100)] public float EnergyRechargeRate = 50f;
 
     public TextMeshProUGUI HeightText;
-    private float currentHeight;
+    public TextMeshProUGUI BestHeightText;
+    private int currentHeight;
+    private int bestHeight;
 
     private GameObject player;
 
@@ -50,6 +52,9 @@ public class GameManager : MonoBehaviour
 
         bestScore = PlayerPrefs.GetFloat("BestScore", 0);
         player = GameObject.FindGameObjectWithTag("Player");
+
+        bestHeight = PlayerPrefs.GetInt("BestHeight", 0);
+        BestHeightText.text = $"BEST:{bestHeight:0}m";
     }
 
     private void Update()
@@ -135,8 +140,20 @@ public class GameManager : MonoBehaviour
     private void UpdateHeight()
     {
         if (IsGameOver) return;
-        currentHeight = Mathf.Max(player.transform.position.y, 0);
+        currentHeight = (int)Mathf.Max(player.transform.position.y, 0);
+        currentHeight = Mathf.Min(9999, currentHeight);
         HeightText.text = $"{currentHeight:0}m";
+
+        if (currentHeight >= bestHeight)
+        {
+            bestHeight = currentHeight;
+            bestHeight = Mathf.Min(9999, bestHeight);
+
+            BestHeightText.text = $"BEST:{bestHeight:0}m";
+
+            PlayerPrefs.SetInt("BestHeight", bestHeight);
+            PlayerPrefs.Save();
+        }
     }
 
     public void GameClear()

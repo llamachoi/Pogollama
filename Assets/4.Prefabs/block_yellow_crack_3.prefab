@@ -78,7 +78,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.256, y: 0.05}
+  m_Size: {x: 0.25, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &1801071366250965545
 MonoBehaviour:
@@ -95,7 +95,7 @@ MonoBehaviour:
   PlatformRendererData: {fileID: 11400000, guid: 6153b482dbca1894aa48cab02c870c61, type: 2}
   BaseBounceForce: 3.5
   CurrentPlatformColor: 2
-  CurrentPlatformType: 0
+  CurrentPlatformType: 1
   SetCrackCount: 0
   CurrentCrackCount: 0
   respawnTime: 5
@@ -234,7 +234,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.256, y: 0.05}
+  m_Size: {x: 0.25, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &1890857702189806813
 MonoBehaviour:
@@ -251,7 +251,7 @@ MonoBehaviour:
   PlatformRendererData: {fileID: 11400000, guid: 6153b482dbca1894aa48cab02c870c61, type: 2}
   BaseBounceForce: 3.5
   CurrentPlatformColor: 2
-  CurrentPlatformType: 0
+  CurrentPlatformType: 1
   SetCrackCount: 0
   CurrentCrackCount: 0
   respawnTime: 5
@@ -390,7 +390,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.256, y: 0.05}
+  m_Size: {x: 0.25, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &5714284947835064984
 MonoBehaviour:
@@ -407,7 +407,7 @@ MonoBehaviour:
   PlatformRendererData: {fileID: 11400000, guid: 6153b482dbca1894aa48cab02c870c61, type: 2}
   BaseBounceForce: 3.5
   CurrentPlatformColor: 2
-  CurrentPlatformType: 0
+  CurrentPlatformType: 1
   SetCrackCount: 0
   CurrentCrackCount: 0
   respawnTime: 5
