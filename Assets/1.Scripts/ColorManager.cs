@@ -5,7 +5,7 @@ public class ColorManager : MonoBehaviour
     public PlatformColor CurrentColor;
     public Color[] Colors;
     [HideInInspector] public int CurrentTotalColors;
-    [SerializeField] private int startColors = 3;
+    private int startColors = 3;
 
     public static ColorManager Instance { get; private set; }
 

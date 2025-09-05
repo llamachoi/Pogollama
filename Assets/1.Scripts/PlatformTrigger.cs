@@ -93,6 +93,7 @@ public class PlatformTrigger : MonoBehaviour
 
         if (ColorManager.Instance.CurrentTotalColors < ColorManager.Instance.Colors.Length)
         {
+            GameManager.Instance.RechargeEnergy();
             ColorManager.Instance.CurrentTotalColors++;
             AudioManager.Instance.PlaySFX(AudioManager.Instance.AddColorSound);
             hasAddedColor = true;

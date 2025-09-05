@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,16 @@ public class GameManager : MonoBehaviour
     private float currentScore;
     private float bestScore;
 
+    public Slider EnergySlider;
+    private float TotalEnergy = 100f;
+    public float EnergyConsumptionRate = 5f;
+    [Range (0, 1)] public float EnergyRechargeRate = 0.5f;
+
+    public TextMeshProUGUI HeightText;
+    private float currentHeight;
+
+    private GameObject player;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -38,6 +49,7 @@ public class GameManager : MonoBehaviour
         GameClearUI.SetActive(false);
 
         bestScore = PlayerPrefs.GetFloat("BestScore", 0);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -48,6 +60,8 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateTimeUI();
+        UpdateEnergyUI();
+        UpdateHeight();
     }
 
     public void GameOver()
@@ -93,6 +107,36 @@ public class GameManager : MonoBehaviour
         int seconds = (int)(TimeElapsed % 60f);
         int centiseconds = (int)((TimeElapsed - Mathf.Floor(TimeElapsed)) * 100f);
         TimeText.text = $"{minutes:00}:{seconds:00}.{centiseconds:00}";
+    }
+
+    void UpdateEnergyUI()
+    {
+        if (IsGameOver) return;
+        TotalEnergy -= EnergyConsumptionRate * Time.deltaTime;
+        TotalEnergy = Mathf.Clamp(TotalEnergy, 0f, 100f);
+        EnergySlider.value = TotalEnergy / 100f;
+
+        if (TotalEnergy <= 0f)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.TimeOverSound);
+            GameOver();
+        }
+    }
+
+    public void RechargeEnergy()
+    {
+        if (IsGameOver) return;
+        // 남아있는 에너지의 50% 만큼 충전
+        TotalEnergy += (100f - TotalEnergy) * EnergyRechargeRate;
+        TotalEnergy = Mathf.Clamp(TotalEnergy, 0f, 100f);
+        EnergySlider.value = TotalEnergy / 100f;
+    }
+
+    private void UpdateHeight()
+    {
+        if (IsGameOver) return;
+        currentHeight = Mathf.Max(player.transform.position.y, 0);
+        HeightText.text = $"{currentHeight:0}m";
     }
 
     public void GameClear()
