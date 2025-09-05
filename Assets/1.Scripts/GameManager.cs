@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public Slider EnergySlider;
     private float TotalEnergy = 100f;
     public float EnergyConsumptionRate = 5f;
-    [Range (0, 1)] public float EnergyRechargeRate = 0.5f;
+    [Range (0, 100)] public float EnergyRechargeRate = 50f;
 
     public TextMeshProUGUI HeightText;
     private float currentHeight;
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
             RestartGame();
         }
 
-        UpdateTimeUI();
+        //UpdateTimeUI();
         UpdateEnergyUI();
         UpdateHeight();
     }
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
     {
         if (IsGameOver) return;
         // 남아있는 에너지의 50% 만큼 충전
-        TotalEnergy += (100f - TotalEnergy) * EnergyRechargeRate;
+        TotalEnergy += EnergyRechargeRate;
         TotalEnergy = Mathf.Clamp(TotalEnergy, 0f, 100f);
         EnergySlider.value = TotalEnergy / 100f;
     }
