@@ -12,7 +12,7 @@ public class PlatformTrigger : MonoBehaviour
     public PlatformColor CurrentPlatformColor;
     public PlatformType CurrentPlatformType;
 
-    private bool hasAddedColor = false;
+    private bool hasStepped = false;
 
     [Range(0, 3)]
     public int SetCrackCount;
@@ -89,14 +89,14 @@ public class PlatformTrigger : MonoBehaviour
 
     private void HandleRainbow()
     {
-        if (hasAddedColor) return;
+        if (hasStepped) return;
 
         if (ColorManager.Instance.CurrentTotalColors < ColorManager.Instance.Colors.Length)
         {
             ColorManager.Instance.CurrentTotalColors++;
-            hasAddedColor = true;
         }
 
+        hasStepped = true;
         GameManager.Instance.RechargeEnergy();
         AudioManager.Instance.PlaySFX(AudioManager.Instance.AddColorSound);
     }
