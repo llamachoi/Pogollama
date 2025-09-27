@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI TimeText;
     public float TimeElapsed = 900f;
 
+    public GameObject GameStartUI;
     public GameObject GameOverUI;
     public GameObject GameClearUI;
     public TextMeshProUGUI ScoreText;
@@ -50,9 +51,9 @@ public class GameManager : MonoBehaviour
         GameOverUI.SetActive(false);
         GameClearUI.SetActive(false);
 
-        bestScore = PlayerPrefs.GetFloat("BestScore", 0);
         player = GameObject.FindGameObjectWithTag("Player");
 
+        bestScore = PlayerPrefs.GetFloat("BestScore", 0);
         bestHeight = PlayerPrefs.GetInt("BestHeight", 0);
         BestHeightText.text = $"BEST:{bestHeight:0}m";
     }
