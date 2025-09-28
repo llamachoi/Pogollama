@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -31,5 +32,64 @@ public class UIManager : MonoBehaviour
 
             pogoTipOutlines[i].enabled = (i == (int)ColorManager.Instance.CurrentColor);
         }
+    }
+
+    [Header("Start UI")]
+    [SerializeField] private GameObject startPanel;   // Panel_Start
+    [SerializeField] private Button startButton;      // Button_Start
+    [SerializeField] private Selectable defaultSelected; // 시작 시 포커스(패드/키보드용)
+
+    [Header("Options")]
+    [Tooltip("시작 시 커서를 보이게 할지(PC)")]
+    [SerializeField] private bool showCursorOnStart = true;
+
+    [Tooltip("시작 시 재생할 BGM 등(선택)")]
+    [SerializeField] private AudioSource bgm;
+
+    bool _started;
+
+    void Awake()
+    {
+        // 게임 정지 (물리/애니메이션/Update 대부분 멈춤)
+        Time.timeScale = 0f;
+        _started = false;
+
+        // UI 보여주기
+        if (startPanel) startPanel.SetActive(true);
+
+        // 커서 보이기/고정 해제
+        if (showCursorOnStart) { Cursor.visible = true; Cursor.lockState = CursorLockMode.None; }
+
+        // 패드/키보드 네비게이션 대비 포커스 지정
+        if (defaultSelected != null)
+        {
+            EventSystem.current?.SetSelectedGameObject(null);
+            EventSystem.current?.SetSelectedGameObject(defaultSelected.gameObject);
+        }
+
+        // 버튼 리스너
+        if (startButton != null)
+        {
+            startButton.onClick.RemoveListener(OnClickStart);
+            startButton.onClick.AddListener(OnClickStart);
+        }
+    }
+
+    public void OnClickStart()
+    {
+        if (_started) return;
+        _started = true;
+
+        // UI 숨기기
+        if (startPanel) startPanel.SetActive(false);
+
+        // 커서 숨김(원하면)
+        if (!showCursorOnStart) { Cursor.visible = false; Cursor.lockState = CursorLockMode.Locked; }
+
+        // 게임 재개
+        Time.timeScale = 1f;
+
+        // BGM 재생(선택)
+        if (bgm && !bgm.isPlaying) bgm.Play();
     }
 }

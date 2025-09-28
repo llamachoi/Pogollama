@@ -23,7 +23,6 @@ public class PlatformTrigger : MonoBehaviour
 
     public float FinishAscendSpeed = 5f;
     public float FinishDuration = 5f;
-    private bool isFinishing = false;
 
     private void Start()
     {
@@ -57,9 +56,6 @@ public class PlatformTrigger : MonoBehaviour
                 case PlatformType.Rainbow:
                     Bounce(rb);
                     HandleRainbow();
-                    break;
-                case PlatformType.Finish:
-                    HandleFinish(rb);
                     break;
             }
         }
@@ -99,19 +95,6 @@ public class PlatformTrigger : MonoBehaviour
         hasStepped = true;
         GameManager.Instance.RechargeEnergy();
         AudioManager.Instance.PlaySFX(AudioManager.Instance.AddColorSound);
-    }
-
-    private void HandleFinish(Rigidbody2D rb)
-    {
-        if (isFinishing) return;
-        isFinishing = true;
-
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.FinalBounceSound);
-
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.linearVelocity = Vector2.up * BaseBounceForce;
-
-        GameManager.Instance.GameClear();
     }
 
     private void ActivatePlatform()
