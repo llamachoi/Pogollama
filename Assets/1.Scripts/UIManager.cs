@@ -2,6 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public static class RunState
+{
+    // 앱 첫 실행이면 true, 씬 리로딩 이후엔 false
+    public static bool IsFirstBoot = true;
+}
+
 public class UIManager : MonoBehaviour
 {
     public GameObject[] UIPogoTip;
@@ -50,12 +56,24 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-        // 게임 정지 (물리/애니메이션/Update 대부분 멈춤)
-        Time.timeScale = 0f;
-        _started = false;
+        bool showTitle = RunState.IsFirstBoot;
 
-        // UI 보여주기
-        if (startPanel) startPanel.SetActive(true);
+        if (startPanel)
+        {
+            // 게임 정지 (물리/애니메이션/Update 대부분 멈춤)
+            Time.timeScale = 0f;
+            _started = false;
+
+            startPanel.SetActive(showTitle);
+            
+            if (!showTitle)
+            {
+                Time.timeScale = 1f;
+                _started = true;
+            }
+
+            RunState.IsFirstBoot = false;
+        }
 
         // 커서 보이기/고정 해제
         if (showCursorOnStart) { Cursor.visible = true; Cursor.lockState = CursorLockMode.None; }
@@ -91,5 +109,7 @@ public class UIManager : MonoBehaviour
 
         // BGM 재생(선택)
         if (bgm && !bgm.isPlaying) bgm.Play();
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.ClickSound);
     }
 }

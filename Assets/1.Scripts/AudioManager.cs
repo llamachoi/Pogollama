@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip TimeOverSound;
     public AudioClip FinalBounceSound;
     public AudioClip GameClearSound;
+    public AudioClip ClickSound;
 
     static private int[] playedIDs = new int[5];
     static private float[] lastPlayedTimes = new float[5];

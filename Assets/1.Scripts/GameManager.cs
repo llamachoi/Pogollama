@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public float TimeElapsed = 900f;
 
     public GameObject GameStartUI;
-    public GameObject GameOverUI;
     public GameObject GameClearUI;
     public TextMeshProUGUI FinalHeightText;
 
@@ -45,7 +44,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameOverUI.SetActive(false);
         GameClearUI.SetActive(false);
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -86,7 +84,7 @@ public class GameManager : MonoBehaviour
             bestHeight = currentHeight;
         }
 
-        FinalHeightText.text = BestHeightText.text;
+        FinalHeightText.text = $"{bestHeight:0}m";
         AudioManager.Instance.PlaySFX(AudioManager.Instance.GameClearSound);
         GameClearUI.SetActive(true);
     }
