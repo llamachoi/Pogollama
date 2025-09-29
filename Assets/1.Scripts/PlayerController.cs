@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
         float move = Input.GetAxisRaw("Horizontal"); // 키보드 입력
 
         // UI 버튼 입력도 합쳐줌
-        if (leftButton.isPressed) move = -1f;
-        if (rightButton.isPressed) move = 1f;
+        if (leftButton.isPressing) move = -1f;
+        if (rightButton.isPressing) move = 1f;
 
         Vector3 newPosition = transform.position + Vector3.right * move * moveSpeed * Time.deltaTime;
 
