@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6646599549874687074}
   - component: {fileID: 3038599334219727355}
   m_Layer: 0
-  m_Name: block_indigo_1
+  m_Name: block_orange_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlatformRendererData: {fileID: 11400000, guid: 6153b482dbca1894aa48cab02c870c61, type: 2}
   BaseBounceForce: 3.5
-  CurrentPlatformColor: 5
+  CurrentPlatformColor: 1
   CurrentPlatformType: 1
   SetCrackCount: 0
   CurrentCrackCount: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 2231489250135145368}
   - component: {fileID: 2785209691585970544}
   m_Layer: 0
-  m_Name: block_indigo_1
+  m_Name: block_orange_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlatformRendererData: {fileID: 11400000, guid: 6153b482dbca1894aa48cab02c870c61, type: 2}
   BaseBounceForce: 3.5
-  CurrentPlatformColor: 5
+  CurrentPlatformColor: 1
   CurrentPlatformType: 1
   SetCrackCount: 0
   CurrentCrackCount: 0
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 6382373479392069814}
   - component: {fileID: 3881222715948963535}
   m_Layer: 0
-  m_Name: block_indigo_1
+  m_Name: block_orange_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlatformRendererData: {fileID: 11400000, guid: 6153b482dbca1894aa48cab02c870c61, type: 2}
   BaseBounceForce: 3.5
-  CurrentPlatformColor: 5
+  CurrentPlatformColor: 1
   CurrentPlatformType: 1
   SetCrackCount: 0
   CurrentCrackCount: 0
