@@ -31,8 +31,6 @@ public class ColorManager : MonoBehaviour
         int nextColorIndex = ((int)CurrentColor + 1) % CurrentTotalColors;
         CurrentColor = (PlatformColor)nextColorIndex;
 
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.ColorChangeSound);
-
         return Colors[(int)CurrentColor];
     }
 }

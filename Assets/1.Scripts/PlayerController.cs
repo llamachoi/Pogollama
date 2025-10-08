@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeColor()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.ColorChangeSound);
         pogoTipRenderer.color = ColorManager.Instance.GetPogoColor();
     }
 
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            pogoTipRenderer.color = ColorManager.Instance.GetPogoColor();
+            ChangeColor();
         }
     }
 
